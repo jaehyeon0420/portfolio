@@ -65,13 +65,13 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex-1 order-1 md:order-2 flex justify-center md:justify-end"
           >
-            <div className="relative w-72 h-72 md:w-96 md:h-96 group">
+            <div className="relative w-50 h-50 md:w-50 md:h-50 group">
               <div className="absolute inset-0 bg-blue-600 rounded-[2rem] rotate-6 opacity-20 group-hover:rotate-12 transition-transform duration-500"></div>
               <div className="absolute inset-0 bg-indigo-600 rounded-[2rem] -rotate-3 opacity-20 group-hover:-rotate-6 transition-transform duration-500"></div>
               <img 
                 src={PERSONAL_INFO.avatarUrl} 
                 alt={PERSONAL_INFO.name} 
-                className="relative w-full h-full object-cover rounded-[2rem] shadow-2xl border-4 border-white z-10"
+                className="relative object-cover rounded-[2rem] shadow-2xl border-4 border-white z-10"
               />
             </div>
           </motion.div>

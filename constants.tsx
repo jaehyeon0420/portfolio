@@ -9,13 +9,13 @@ export const PERSONAL_INFO = {
   tagline1: "3년의 백엔드 숙련도를 바탕으로 '실행 가능한'",
   tagline2: "AI 서비스를 구축하는 엔지니어 ",
   location: "경기도 부천",
-  avatarUrl: "files/images/id-photo-2.jpg" 
+  avatarUrl: "files/images/id-photo.jpg" 
 };
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/jaehyeon0420",
-  linkedin: "https://linkedin.com",
-  youtube: "https://youtube.com",
+  linkedin: "https://www.linkedin.com/in/jaehyeon-bae-445a09384/",
+  youtube: "#",
   velog: "https://velog.io/@qowo0420/series",
 };
 

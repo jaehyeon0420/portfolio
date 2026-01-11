@@ -13,10 +13,10 @@ const App: React.FC = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <QuestionSection />
+        <ProjectSection />
         <ExperienceSection />
         <SkillSection />
-        <ProjectSection />
+        <QuestionSection />
       </main>
       <ContactSection />
     </div>
