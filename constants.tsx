@@ -9,7 +9,7 @@ export const PERSONAL_INFO = {
   tagline1: "3년의 백엔드 숙련도를 바탕으로 '실행 가능한'",
   tagline2: "AI 서비스를 구축하는 엔지니어 ",
   location: "경기도 부천",
-  avatarUrl: "/files/images/id-photo-2.jpg" 
+  avatarUrl: "files/images/id-photo-2.jpg" 
 };
 
 export const SOCIAL_LINKS = {
@@ -104,17 +104,17 @@ export const PROJECTS: Project[] = [
 이 과정은 사용자가 설정한 목표 성능에 도달하거나 최대 반복 횟수에 도달할 때까지 반복됩니다. 웹 인터페이스는 React로 구현되어 사용자가 실시간으로 최적화 과정을 모니터링하고, 중간 결과를 확인할 수 있도록 돕습니다.
 
 백엔드는 FastAPI로 구축되어 있으며, Celery를 사용하여 무거운 학습 작업을 비동기로 처리합니다. 결과 데이터는 PostgreSQL에 저장되어 추후 분석에 활용됩니다.`,
-    thumnailimage : "/files/images/deepnexus-logo.jpg",
-    images: ["/files/images/deepnexus-login.png",
-             "/files/images/deepnexus-main.png",
-             "/files/images/deepnexus-rag-1.png",
-             "/files/images/deepnexus-rag-2.png",
-             "/files/images/deepnexus-rag-3.png",
-             "/files/images/deepnexus-rag-4.png",
-             "/files/images/deepnexus-rag-5.png",
-             "/files/images/deepnexus-langsmith.png",
+    thumnailimage : "files/images/deepnexus-logo.jpg",
+    images: ["files/images/deepnexus-login.png",
+             "files/images/deepnexus-main.png",
+             "files/images/deepnexus-rag-1.png",
+             "files/images/deepnexus-rag-2.png",
+             "files/images/deepnexus-rag-3.png",
+             "files/images/deepnexus-rag-4.png",
+             "files/images/deepnexus-rag-5.png",
+             "files/images/deepnexus-langsmith.png",
             ],
-    videoUrl: "/files/videos/deepnexus.mp4"
+    videoUrl: "files/videos/deepnexus.mp4"
   },
   {
     id: "p2",
@@ -134,16 +134,16 @@ export const PROJECTS: Project[] = [
 - CUDA 커널 구현 추가.
 - 역전파를 위한 그래디언트 계산 추가.
 - 99% 이상의 커버리지를 가진 단위 테스트 작성.`,
-    thumnailimage : "/files/images/hackathon-logo.png",
-    images: ["/files/images/hackathon-1.png",
-             "/files/images/hackathon-2.png",
-             "/files/images/hackathon-3.png",
-             "/files/images/hackathon-4.png",
-             "/files/images/hackathon-5.png",
-             "/files/images/hackathon-6.png",
-             "/files/images/hackathon-7.png"
+    thumnailimage : "files/images/hackathon-logo.png",
+    images: ["files/images/hackathon-1.png",
+             "files/images/hackathon-2.png",
+             "files/images/hackathon-3.png",
+             "files/images/hackathon-4.png",
+             "files/images/hackathon-5.png",
+             "files/images/hackathon-6.png",
+             "files/images/hackathon-7.png"
     ],
-    videoUrl: "/files/videos/hackathon.mp4"
+    videoUrl: "files/videos/hackathon.mp4"
   },
   {
     id: "p3",
@@ -170,14 +170,14 @@ export const PROJECTS: Project[] = [
 
 ## 나의 기여
 4명의 팀을 이끌었으며, 특히 모델 아키텍처 설계와 데이터 증강 파이프라인에 집중했습니다.`,
-    thumnailimage : "/files/images/sammunchul-logo.png",
-    images: ["/files/images/snapq-1.png",
-             "/files/images/snapq-2.png",
-             "/files/images/snapq-3.png",
-             "/files/images/snapq-4.png",
-             "/files/images/snapq-5.png",
-             "/files/images/snapq-6.png"
+    thumnailimage : "files/images/sammunchul-logo.png",
+    images: ["files/images/snapq-1.png",
+             "files/images/snapq-2.png",
+             "files/images/snapq-3.png",
+             "files/images/snapq-4.png",
+             "files/images/snapq-5.png",
+             "files/images/snapq-6.png"
     ],
-    videoUrl: "/files/videos/snapq.mp4"
+    videoUrl: "files/videos/snapq.mp4"
   }  
 ];
