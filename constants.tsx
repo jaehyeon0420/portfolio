@@ -105,14 +105,14 @@ export const PROJECTS: Project[] = [
 
 백엔드는 FastAPI로 구축되어 있으며, Celery를 사용하여 무거운 학습 작업을 비동기로 처리합니다. 결과 데이터는 PostgreSQL에 저장되어 추후 분석에 활용됩니다.`,
     thumnailimage : "files/images/deepnexus-logo.jpg",
-    images: ["files/images/deepnexus-login.png",
-             "files/images/deepnexus-main.png",
-             "files/images/deepnexus-rag-1.png",
-             "files/images/deepnexus-rag-2.png",
-             "files/images/deepnexus-rag-3.png",
-             "files/images/deepnexus-rag-4.png",
-             "files/images/deepnexus-rag-5.png",
-             "files/images/deepnexus-langsmith.png",
+    images: ["files/images/deepnexus-login.PNG",
+             "files/images/deepnexus-main.PNG",
+             "files/images/deepnexus-rag-1.PNG",
+             "files/images/deepnexus-rag-2.PNG",
+             "files/images/deepnexus-rag-3.PNG",
+             "files/images/deepnexus-rag-4.PNG",
+             "files/images/deepnexus-rag-5.PNG",
+             "files/images/deepnexus-langsmith.PNG",
             ],
     videoUrl: "files/videos/deepnexus.mp4"
   },
@@ -170,13 +170,13 @@ export const PROJECTS: Project[] = [
 
 ## 나의 기여
 4명의 팀을 이끌었으며, 특히 모델 아키텍처 설계와 데이터 증강 파이프라인에 집중했습니다.`,
-    thumnailimage : "files/images/sammunchul-logo.png",
-    images: ["files/images/snapq-1.png",
-             "files/images/snapq-2.png",
-             "files/images/snapq-3.png",
-             "files/images/snapq-4.png",
-             "files/images/snapq-5.png",
-             "files/images/snapq-6.png"
+    thumnailimage : "files/images/snapq-logo.png",
+    images: ["files/images/snapq-1.PNG",
+             "files/images/snapq-2.PNG",
+             "files/images/snapq-3.PNG",
+             "files/images/snapq-4.PNG",
+             "files/images/snapq-5.PNG",
+             "files/images/snapq-6.PNG"
     ],
     videoUrl: "files/videos/snapq.mp4"
   }  
