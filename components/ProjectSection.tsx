@@ -33,6 +33,7 @@ const ProjectSection: React.FC = () => {
           <div className="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
         </motion.div>
 
+        <h4 className="text-1xl text-slate-600 mb-4">※ Video는 첫 실행 시, 3~5초의 로딩 시간이 소요될 수 있습니다.</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {PROJECTS.map((project, index) => (
             <motion.div
