@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface Project {
   id: string;
+  main_title: string;
   title: string;
   period: string;
   teamSize: number;
@@ -30,6 +31,6 @@ export interface SkillItem {
 }
 
 export interface SkillCategory {
-  category: 'Language' | 'Frontend' | 'Backend' | 'Infra';
+  category: 'Strong' | 'Knowledgeable' | 'ETC';
   skills: string[];
 }

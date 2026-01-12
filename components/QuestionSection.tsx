@@ -111,11 +111,8 @@ const QuestionSection: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center justify-center p-3 bg-blue-100 text-blue-600 rounded-full mb-4">
-            <Sparkles size={24} />
-          </div>
           <h2 className="text-4xl font-bold text-slate-900 mb-4">AI 직무 적합도 확인</h2>
-          <p className="text-slate-500 break-keep">
+          <p className="text-slate-600 break-keep">
             가상의 AI 면접관에게, 저의 포트폴리오 내용을 바탕으로 직무 적합도를 물어보세요.
           </p>
         </motion.div>

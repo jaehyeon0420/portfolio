@@ -2,12 +2,15 @@ import React from 'react';
 import { Experience, Project, SkillCategory } from './types';
 
 export const PERSONAL_INFO = {
+  id : "jaehyeon0420",
   name: "배재현",
+  encName : "BaeJaeHyeon",
   dob: "1995.04.20",
   email: "qowogus0420@gmail.com",
   phone: "010-9431-9315",
-  tagline1: "3년의 백엔드 숙련도를 바탕으로 '실행 가능한'",
-  tagline2: "AI 서비스를 구축하는 엔지니어 ",
+  tagline1: "백엔드라는 탄탄한 기본기 위에 최신 AI 기술을 유연하게 접목하여 실무적인 솔루션을 만듭니다.",
+  tagline2: "사내 정보 접근 시간을 80% 이상 단축하는 정형/비정형 데이터 통합 RAG를 구축한 경험이 있으며",
+  tagline3: "자동화된 CI/CD 환경을 구축하여 서비스의 안정성을 확보합니다.",
   location: "경기도 부천",
   avatarUrl: "files/images/id-photo.jpg" 
 };
@@ -54,22 +57,26 @@ export const EXPERIENCES: Experience[] = [
   }
 ];
 
+
 export const SKILLS: SkillCategory[] = [
   {
-    category: 'Language',
-    skills: ['Java', 'Python', 'JavaScript', 'SQL']
+    category: 'Strong',
+    skills: [
+      'Java', 'Spring Boot', 'Javascript', 'React.js', 'Axios', 'Zustand', 'JSP', 'jQuery', 'Oracle', 'Mybatis'
+    ]
   },
   {
-    category: 'Frontend',
-    skills: ['React', 'Electron', 'Zustand', 'Recoil', 'Vite', 'jQuery', 'Axios']
+    category: 'Knowledgeable',
+    skills: [
+      'Python', 'FastAPI', 'LangChain', 'LangGraph', 'Redis', 'PostgreSQL', 'Apache Tomcat',
+      'Electron', 'Recoil', 'Apache Tomcat'
+    ]
   },
   {
-    category: 'Backend',
-    skills: ['Spring Boot', 'FastAPI', 'LangChain', 'LangGraph', 'Redis', 'PostgreSQL', 'Oracle', 'Mybatis']
-  },
-  {
-    category: 'Infra',
-    skills: ['Azure', 'Docker', 'Jenkins', 'Git Action']
+    category: 'ETC',
+    skills: [
+      'Azure', 'Docker', 'Jenkins', 'GitHub Actions', 'Figma'
+    ]
   }
 ];
 
@@ -77,12 +84,13 @@ export const PROJECTS: Project[] = [
   {
     id: "p1",
     kind : "Project",
-    title: "사내 정보를 한 번에 찾는 데이터 허브",
+    main_title : "Deep Nexus",
+    title: "사내 정보를 한 번에 찾는 Agentic RAG",
     period: "2025.12.22 - 2026.01.02 (8일)",
     teamSize: 6,
     role: "시스템 아키텍트 및 RAG 시스템 구축",
     description: "LangChain 기반의 정형/비정형 통합 검색을 통해, 정보 탐색 시간을 혁신적으로 단축한 RAG 솔루션입니다.",
-    techStack: ["LangChain & LangGraph", "LangSmith", "Python",
+    techStack: ["LangChain", "LangGraph", "LangSmith", "Python",
                 "FastAPI", "React", "Javascript", "Zustand", "Electron", 
                 "OpenAI API", "Redis", "PostgreSQL", "ONNX-int8", "KURE-v1"],
     readme: `# 자동 프롬프트 최적화기 (Auto-Prompt Optimizer)
@@ -119,6 +127,7 @@ export const PROJECTS: Project[] = [
   {
     id: "p2",
     kind : "Challenge",
+    main_title : "The Missing Page",
     title: "강의 PDF와 대화 로그 기반 복습 노트 생성 앱",
     period: "2025.12.05 - 2025.12.12 (6일)",
     teamSize: 2,
@@ -148,6 +157,7 @@ export const PROJECTS: Project[] = [
   {
     id: "p3",
     kind : "Project",
+    main_title : "Snap Q",
     title: "차량 파손 부위 판별 및 수리비 예측 시스템",
     period: "2025.11.11 - 2025.11.20 (8일)",
     teamSize: 6,

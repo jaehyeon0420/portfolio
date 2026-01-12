@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { hover, motion } from 'framer-motion';
 import { FileText, Image as ImageIcon, Play, Users } from 'lucide-react';
 import { PROJECTS } from '../constants';
 import { Project } from '../types';
@@ -46,11 +46,19 @@ const ProjectSection: React.FC = () => {
             >
               {/* Card Header (using first image as cover) */}
               <div className="relative h-48 overflow-hidden bg-slate-200 group">
-                <img
-                  src={project.thumnailimage}
-                  alt={project.title} 
+                {project.videoUrl ? (
+                <video 
+                   src={project.videoUrl} 
+                   controls 
+                   className="w-full h-full"
+                   poster={project.thumnailimage} 
+                 />)
+                 : (
+                 <img
+                  src="files/images/default-image.png"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+                 />)
+                }
               </div>
 
               {/* Card Body */}
@@ -60,13 +68,12 @@ const ProjectSection: React.FC = () => {
                   {project.kind == 'Project'
                   ? <span className="text-blue-600 flex items-center gap-1">{project.kind}</span>
                   : <span className="text-green-600 flex items-center gap-1">{project.kind}</span>}
-                  <span className="text-xs text-slate-400">{project.period}</span>
+                  <span className="flex items-center gap-1"><Users size={14}/> {project.teamSize}명 참여</span>
+                  <span className="text-s text-slate-400">{project.period}</span>
                 </div>
 
-                <div className="flex items-center text-sm text-slate-500 mb-4 gap-4">
-                  <span className="flex items-center gap-1"><Users size={14}/> {project.teamSize}명 참여</span>
-                  <div className="w-px h-3 bg-slate-300"></div>
-                  <span className="text-blue-600 font-medium truncate flex-1">{project.role}</span>
+                <div className="flex items-center text-sm text-slate-500 mb-4 gap-1">
+                  담당 역할 :<span className="text-blue-600 font-medium truncate flex-1">{project.role}</span>
                 </div>
 
                 <p className="text-slate-600 text-sm mb-4 line-clamp-3 break-keep">

@@ -68,7 +68,7 @@ const ContactSection: React.FC = () => {
         </div>
 
         <div className="mt-20 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm">
-          &copy; {new Date().getFullYear()} {PERSONAL_INFO.name}. All rights reserved.
+          &copy; {new Date().getFullYear()} {PERSONAL_INFO.encName}. All rights reserved.
         </div>
       </div>
     </footer>
