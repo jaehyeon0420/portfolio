@@ -4,7 +4,8 @@ export interface Project {
   id: string;
   main_title: string;
   title: string;
-  period: string;
+  period1: string;
+  period2: string;
   teamSize: number;
   role: string;
   kind : string;
@@ -12,8 +13,8 @@ export interface Project {
   techStack: string[];
   readme: string;
   thumnailimage: string;
-  images: string[];
   videoUrl: string;
+  github_url : string;
 }
 
 export interface Experience {

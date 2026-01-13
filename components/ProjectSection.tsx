@@ -69,7 +69,7 @@ const ProjectSection: React.FC = () => {
                   ? <span className="text-blue-600 flex items-center gap-1">{project.kind}</span>
                   : <span className="text-green-600 flex items-center gap-1">{project.kind}</span>}
                   <span className="flex items-center gap-1"><Users size={14}/> {project.teamSize}명 참여</span>
-                  <span className="text-s text-slate-400">{project.period}</span>
+                  <span className="text-s text-slate-900">{project.period1} <span className="text-s text-purple-600">({project.period2})</span></span>
                 </div>
 
                 <div className="flex items-center text-sm text-slate-500 mb-4 gap-1">
@@ -90,7 +90,7 @@ const ProjectSection: React.FC = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="grid grid-cols-3 gap-2 mt-auto">
+                <div className="grid grid-cols-1 gap-2 mt-auto">
                   <Button 
                     variant="ghost" 
                     className="!px-2 !py-2 text-xs" 
@@ -99,26 +99,6 @@ const ProjectSection: React.FC = () => {
                   >
                     README
                   </Button>
-                  {project.images.length > 0 &&
-                  <Button 
-                    variant="ghost" 
-                    className="!px-2 !py-2 text-xs" 
-                    icon={<ImageIcon size={16}/>}
-                    onClick={() => openModal(project, 'image')}
-                  >
-                    IMAGE
-                  </Button>
-                  }
-                  {project.videoUrl &&
-                  <Button 
-                    variant="ghost" 
-                    className="!px-2 !py-2 text-xs" 
-                    icon={<Play size={16}/>}
-                    onClick={() => openModal(project, 'video')}
-                  >
-                    VIDEO
-                  </Button>
-                  }
                 </div>
               </div>
             </motion.div>

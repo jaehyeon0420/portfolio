@@ -9,7 +9,7 @@ export const PERSONAL_INFO = {
   email: "qowogus0420@gmail.com",
   phone: "010-9431-9315",
   tagline1: "백엔드라는 탄탄한 기본기 위에 최신 AI 기술을 유연하게 접목하여 실무적인 솔루션을 만듭니다.",
-  tagline2: "사내 정보 접근 시간을 80% 이상 단축하는 정형/비정형 데이터 통합 RAG를 구축한 경험이 있으며",
+  tagline2: "사내 정보 탐색 시간을 80% 이상 단축하는 정형/비정형 데이터 통합 RAG를 구축한 경험이 있으며",
   tagline3: "자동화된 CI/CD 환경을 구축하여 서비스의 안정성을 확보합니다.",
   location: "경기도 부천",
   avatarUrl: "files/images/id-photo.jpg" 
@@ -62,7 +62,7 @@ export const SKILLS: SkillCategory[] = [
   {
     category: 'Strong',
     skills: [
-      'Java', 'Spring Boot', 'Javascript', 'React.js', 'Axios', 'Zustand', 'JSP', 'jQuery', 'Oracle', 'Mybatis'
+      'Java', 'Spring Boot', 'Javascript', 'React.js', 'Axios', 'Zustand', 'JSP', 'jQuery', 'Oracle', 'Mybatis', 'HTML5', 'CSS3'
     ]
   },
   {
@@ -86,50 +86,54 @@ export const PROJECTS: Project[] = [
     kind : "Project",
     main_title : "Deep Nexus",
     title: "사내 정보를 한 번에 찾는 Agentic RAG",
-    period: "2025.12.22 - 2026.01.02 (8일)",
+    period1: "2025.12.22 - 2026.01.02",
+    period2: "8일",
     teamSize: 6,
     role: "시스템 아키텍트 및 RAG 시스템 구축",
     description: "LangChain 기반의 정형/비정형 통합 검색을 통해, 정보 탐색 시간을 혁신적으로 단축한 RAG 솔루션입니다.",
     techStack: ["LangChain", "LangGraph", "LangSmith", "Python",
                 "FastAPI", "React", "Javascript", "Zustand", "Electron", 
-                "OpenAI API", "Redis", "PostgreSQL", "ONNX-int8", "KURE-v1"],
-    readme: `# 자동 프롬프트 최적화기 (Auto-Prompt Optimizer)
+                "OpenAI API", "Redis", "PostgreSQL(pgvector)", "ONNX-int8", "KURE-v1"],
+    readme: `
+## 비즈니스 목표
+- 기존 : 근로자는 필요한 정보를 탐색하고 수집하는데 업무 시간의 약 20% 이상을 낭비하고, 1회당 평균 200초 이상이 걸림
+- 목표 : 사내 정형(RDB)/비정형(Google Drive) 통합 데이터 기반 RAG를 구축하여 업무 생산성 향상
 
-## 개요
-이 프로젝트는 수동 프롬프트 엔지니어링의 번거로움을 해결하기 위해 개선 과정을 자동화합니다.
+## 기술 선정 이유
+- **LangGraph**: 정형 데이터 조회 명령어(SQL) 오류 발생 시, 자가 교정 루프를 통해 응답 성공률을 높이기 위함
+- **ONNX-int8**: 프로젝트 목표인 탐색 시간 단축을 위해, 1~2% 내외의 미세한 정확도 손실을 감수하는 대신 CPU 환경에서도 안정적 추론 속도 보장을 위함
+- **KURE-v1**: 한국어 처리·전문 용어 파악·방대한 양의 문서 처리에 특화되어, 기업 내 비즈니스 지식이 포함된 문서 분석 및 검색에 최적화
+- **Redis**: 시스템 부하 감소와 빠른 응답 처리를 위해 시맨틱 캐싱을 통해 의적 유사도 90% 이상 일치 질문에 대한 즉각 응답 체계 구축
+- **pgvector**: 단일 PostgreSQL 엔진을 통한 정형/비정형 데이터 통합 설계로 제한된 일정 내에서 관리 복잡도 최소화
+- **Electron**: 기존 업무 흐름을 저해하지 않는다는 사용자 경험을 확보하고자 브라우저 환경에서 벗어나 챗봇 형태의 서비스를 제공
 
-## 주요 기능
-- **RL 피드백 루프**: PPO를 사용하여 프롬프트 토큰을 최적화합니다.
-- **평가 프레임워크**: 표준 벤치마크(MMLU)에 대한 내장 평가 기능을 제공합니다.
-- **대시보드**: 수렴 과정을 실시간으로 시각화합니다.
+## 문제 해결 과정
+##1. Reranker 모델 도입에 따른 Latency 병목 현상##
+- 문제 : 구축 이후 성능 분석 결과, 검색 정확도 향상을 위해 도입한 Reranker 모델이 전체 워크플로우 시간의 약 95%(Chunk 당 7초 * 15개 = --총 105초--)를 차지
+- 1차 시도 : Reranking 이후 최종 결과 Chunk를 3개로 조정 -> 미세한 LLM 추론 속도 향상은 있었으나 Reranking 대상 Chunk는 여전히 15개로 사실상 무의미
+- 2차 시도 : 검색 Chunk 개수 5개로 조정 -> 전체 속도는 1/3 빨라지지만 정확도가 매우 떨어져 대규모 환경일수록 답변의 품질이 떨어짐
+- 해결 : 양자화를 적용한 경량 모델(ONNX-int8)로 교체하여 Chunk 당 추론 속도를 기존 대비 ^^약 23배^^ 향상시킴(Chunk 당 0.3초 * 15개 = ^^총 4.5초^^)
 
-## 결과
-제로샷 베이스라인 대비 추론 작업에서 15% 성능 향상을 달성했습니다.
+##2. 보안 강화 목적인 RLS 정책이 적용된 데이터 접근 시, 권한 부족과 사용자 인지 불일치##
+- 문제 : LLM 생성 SQL 실행 -> 권한 부족으로 조회 결과 0개 -> 사용자에게 "데이터 미 존재" 응답 -> 권한 부족과 데이터 실제 부재를 구분하지 못함
+- 1차 시도 : 모든 SQL 실행 이전에 사용자 권한을 체크하기 위한 검증 질의 실행 -> 요청마다 검증 로직 추가되어 성능 저하 발생
+- 해결 : 조회 결과 건수가 0건 일 때에만 관리자 권한으로 데이터의 존재 여부만 후검증 및 분기 처리하여 사용자 경험 최적화
 
-## 상세 구현 내용
-이 프로젝트는 크게 세 가지 모듈로 구성됩니다. 첫째, 프롬프트 생성기 모델은 초기 프롬프트 후보군을 생성합니다. 둘째, 평가 모듈은 생성된 프롬프트를 사용하여 LLM의 출력을 얻고, 사전 정의된 메트릭을 기반으로 점수를 매깁니다. 셋째, 강화학습 에이전트는 이 점수를 보상(Reward)으로 사용하여 프롬프트 생성 정책을 업데이트합니다.
-
-이 과정은 사용자가 설정한 목표 성능에 도달하거나 최대 반복 횟수에 도달할 때까지 반복됩니다. 웹 인터페이스는 React로 구현되어 사용자가 실시간으로 최적화 과정을 모니터링하고, 중간 결과를 확인할 수 있도록 돕습니다.
-
-백엔드는 FastAPI로 구축되어 있으며, Celery를 사용하여 무거운 학습 작업을 비동기로 처리합니다. 결과 데이터는 PostgreSQL에 저장되어 추후 분석에 활용됩니다.`,
+## 성과
+- 정보 탐색 시간을 --200초--에서 평균 ^^7초^^로 ^^96.5%^^ 단축하여, 업무의 생산성 향상
+- KURE-v1 모델 도입으로 약 ^^30%^^ 이상의 한국어 문서 검색 정확도 증가
+`,
     thumnailimage : "files/images/deepnexus-logo.jpg",
-    images: ["files/images/deepnexus-login.PNG",
-             "files/images/deepnexus-main.PNG",
-             "files/images/deepnexus-rag-1.PNG",
-             "files/images/deepnexus-rag-2.jpg",
-             "files/images/deepnexus-rag-3.jpg",
-             "files/images/deepnexus-rag-4.PNG",
-             "files/images/deepnexus-rag-5.PNG",
-             "files/images/deepnexus-langsmith.PNG",
-            ],
-    videoUrl: "files/videos/deepnexus.mp4"
+    videoUrl: "files/videos/deepnexus.mp4",
+    github_url : "https://github.com/jaehyeon0420/ms-second-fast-repo",
   },
   {
     id: "p2",
     kind : "Challenge",
     main_title : "The Missing Page",
     title: "강의 PDF와 대화 로그 기반 복습 노트 생성 앱",
-    period: "2025.12.05 - 2025.12.12 (6일)",
+    period1: "2025.12.05 - 2025.12.12",
+    period2: "6일",
     teamSize: 2,
     role: "프롬프트 엔지니어링",
     description: "학습자와 LLM간의 대화 로그를 분석하여 관련 강의 슬라이드에 자동으로 매핑 및 복습 노트를 생성해주는 에듀테크 서비스입니다.",
@@ -144,22 +148,16 @@ export const PROJECTS: Project[] = [
 - 역전파를 위한 그래디언트 계산 추가.
 - 99% 이상의 커버리지를 가진 단위 테스트 작성.`,
     thumnailimage : "files/images/hackathon-logo.png",
-    images: ["files/images/hackathon-1.png",
-             "files/images/hackathon-2.png",
-             "files/images/hackathon-3.png",
-             "files/images/hackathon-4.png",
-             "files/images/hackathon-5.png",
-             "files/images/hackathon-6.png",
-             "files/images/hackathon-7.png"
-    ],
-    videoUrl: "files/videos/hackathon.mp4"
+    videoUrl: "files/videos/hackathon.mp4",
+    github_url : "https://www.kaggle.com/competitions/gemini-3/writeups/new-writeup-1765379357595"
   },
   {
     id: "p3",
     kind : "Project",
     main_title : "Snap Q",
     title: "차량 파손 부위 판별 및 수리비 예측 시스템",
-    period: "2025.11.11 - 2025.11.20 (8일)",
+    period1: "2025.11.11 - 2025.11.20",
+    period2: "8일",
     teamSize: 6,
     role: "풀스택 개발 및 DevOps 리드",
     description: "딥러닝 기반 차량 파손 이미지 분석을 통한 파손 종류 식별, 부위 감지, 실시간 수리비 예측 솔루션입니다.",
@@ -181,13 +179,7 @@ export const PROJECTS: Project[] = [
 ## 나의 기여
 4명의 팀을 이끌었으며, 특히 모델 아키텍처 설계와 데이터 증강 파이프라인에 집중했습니다.`,
     thumnailimage : "files/images/snapq-logo.png",
-    images: ["files/images/snapq-1.PNG",
-             "files/images/snapq-2.PNG",
-             "files/images/snapq-3.PNG",
-             "files/images/snapq-4.PNG",
-             "files/images/snapq-5.PNG",
-             "files/images/snapq-6.PNG"
-    ],
-    videoUrl: "files/videos/snapq.mp4"
+    videoUrl: "files/videos/snapq.mp4",
+    github_url : ""
   }  
 ];

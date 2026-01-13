@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { X, ChevronLeft, ChevronRight, Calendar, Users, Building, AlertTriangle, Trophy, Cpu, GitBranch, BookOpen, Target } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Calendar, Users, Building, AlertTriangle, Trophy, Cpu, GitBranch, BookOpen, Target, Link } from 'lucide-react';
 import { Project } from '../types';
 
 interface ModalProps {
@@ -93,7 +93,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
   const SectionIcon = ({ type }: { type: ParsedSection['type'] }) => {
     switch (type) {
       case 'problem': return <AlertTriangle className="text-orange-500" size={20} />;
-      case 'result': return <Trophy className="text-green-600" size={20} />;
+      case 'result': return <Trophy className="text-yellow-600" size={20} />;
       case 'tech': return <Cpu className="text-blue-500" size={20} />;
       case 'process': return <GitBranch className="text-purple-500" size={20} />;
       case 'overview': return <Target className="text-indigo-500" size={20} />;
@@ -105,7 +105,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
   const getSectionStyles = (type: ParsedSection['type']) => {
     switch (type) {
       case 'problem': return "bg-orange-50 border-orange-100";
-      case 'result': return "bg-green-50 border-green-100";
+      case 'result': return "bg-yellow-50 border-yellow-100";
       case 'tech': return "bg-blue-50 border-blue-100";
       case 'process': return "bg-purple-50 border-purple-100";
       case 'overview': return "bg-indigo-50 border-indigo-100";
@@ -116,38 +116,54 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm transition-opacity duration-300" onClick={onClose}>
       <div 
-        className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-[fadeInScale_0.3s_ease-out]"
+        className="relative w-full max-w-7xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-[fadeInScale_0.3s_ease-out]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header - Fixed */}
         <div className="flex-none p-6 border-b border-slate-100 bg-white z-10">
           <div className="flex justify-between items-start mb-4">
              <div>
-               <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight">
-                 {project.main_title} : {project.title}
+               <h3 className="flex text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight">
+                 {project.main_title} : {project.title}&nbsp;
+                 {project.kind == 'Project'
+                  ? <span className="text-blue-600 flex items-center gap-1">[{project.kind}]</span>
+                  : <span className="text-green-600 flex items-center gap-1">[{project.kind}]</span>}
                </h3>
              </div>
              <button 
               onClick={onClose}
-              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
-             >
+              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
                <X size={24} />
              </button>
           </div>
 
           {/* Project Meta Info Bar */}
-          <div className="flex flex-wrap gap-y-2 gap-x-6 text-sm text-slate-600 bg-slate-50 px-4 py-3 rounded-xl border border-slate-100">
-             <div className="flex items-center gap-2">
+          <div className="flex flex-wrap gap-y-2 gap-x-6 text-sm text-slate-600 px-4 py-3 rounded-xl border border-slate-100">
+             <div className="flex items-center gap-2 mb-2">
                <Calendar size={16} className="text-blue-500"/>
-               <span className="font-medium">{project.period}</span>
+               <span className="font-medium">{project.period1} <span className="text-s text-purple-600">({project.period2})</span></span>
              </div>
-             <div className="flex items-center gap-2">
+             <div className="flex items-center gap-2 mb-2">
                <Users size={16} className="text-blue-500"/>
                <span>{project.teamSize}명 참여</span>
              </div>
-             <div className="flex items-center gap-2">
+             <div className="flex items-center gap-2 mb-2">
                <Building size={16} className="text-blue-500"/>
-               <span>{project.role}</span>
+               담당 역할 : <span className="text-blue-500">{project.role}</span>
+             </div>
+             {project.github_url &&
+             <div className="flex items-center gap-2 mb-2">
+               <Link size={16} className="text-blue-500"/>
+               <a href={project.github_url}>{project.github_url}</a>
+             </div>
+             }
+             <br/>
+             <div className="flex items-center gap-2">
+                  {project.techStack.map(tech => (
+                    <span key={tech} className="text-xs px-2 py-1 bg-slate-100 text-slate-600 rounded">
+                      {tech}
+                    </span>
+                  ))}
              </div>
           </div>
         </div>
@@ -157,7 +173,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
           
           {/* README CASE STUDY VIEW */}
           {type === 'readme' && (
-            <div className="max-w-4xl mx-auto space-y-6">
+            <div className="max-w-8xl mx-auto space-y-6">
               {parsedReadme.map((section, idx) => (
                 <div 
                   key={idx} 
@@ -185,12 +201,32 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
                           )}
                           <span className={isBullet ? 'flex-1' : ''}>
                              {/* Simple highlighting for text between ** */}
-                             {content.split(/(\*\*.*?\*\*)/).map((part, j) => 
+                             {content.split(/(\*\*.*?\*\*|##.*?##|--.*?--|\^\^.*?\^\^)/).map((part, j) => 
                                part.startsWith('**') && part.endsWith('**') ? (
                                  <strong key={j} className="font-bold text-slate-900 bg-yellow-100/50 px-1 rounded">
                                    {part.slice(2, -2)}
                                  </strong>
-                               ) : (
+                               ) 
+                               : 
+                               part.startsWith('##') && part.endsWith('##') ? (
+                                 <strong key={j} className="font-bold text-slate-900 rounded">
+                                   {part.slice(2, -2)}
+                                 </strong>
+                               )
+                               :
+                               part.startsWith('--') && part.endsWith('--') ? (
+                                 <strong key={j} className="font-bold text-red-600 text-slate-500 rounded">
+                                   {part.slice(2, -2)}
+                                 </strong>
+                               )
+                               :
+                               part.startsWith('^^') && part.endsWith('^^') ? (
+                                 <strong key={j} className="font-bold text-green-700 text-slate-900  rounded">
+                                   {part.slice(2, -2)}
+                                 </strong>
+                               )
+                               :
+                               (
                                  part
                                )
                              )}
@@ -202,60 +238,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
                 </div>
               ))}
             </div>
-          )}
-
-          {/* IMAGE GALLERY VIEW */}
-          {type === 'image' && (
-            <div className="h-full flex flex-col items-center justify-center min-h-[400px]">
-              <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
-                <img 
-                  src={project.images[currentImgIndex]} 
-                  alt={`Project ${project.title} - ${currentImgIndex + 1}`} 
-                  className="w-full h-full object-contain"
-                />
-                
-                {project.images.length > 1 && (
-                  <>
-                    <button 
-                      onClick={prevImage} 
-                      className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-all backdrop-blur-sm"
-                    >
-                        <ChevronLeft size={24} />
-                    </button>
-                    <button 
-                      onClick={nextImage} 
-                      className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-all backdrop-blur-sm"
-                    >
-                        <ChevronRight size={24} />
-                    </button>
-                  </>
-                )}
-              </div>
-
-              <div className="mt-6 flex gap-3">
-                {project.images.map((_, idx) => (
-                  <button 
-                    key={idx}
-                    onClick={() => setCurrentImgIndex(idx)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${idx === currentImgIndex ? 'bg-blue-600 scale-125' : 'bg-slate-300 hover:bg-slate-400'}`}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* VIDEO PLAYER VIEW */}
-          {type === 'video' && (
-             <div className="h-full flex items-center justify-center min-h-[400px]">
-               <div className="w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl aspect-video">
-                 <video 
-                   src={project.videoUrl} 
-                   controls 
-                   autoPlay 
-                   className="w-full h-full"
-                 />
-               </div>
-             </div>
           )}
         </div>
       </div>
