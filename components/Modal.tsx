@@ -158,7 +158,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
              </div>
              }
              <br/>
-             <div className="flex items-center gap-2">
+             <div className="flex flex-wrap items-center gap-2">
                   {project.techStack.map(tech => (
                     <span key={tech} className="text-xs px-2 py-1 bg-slate-100 text-slate-600 rounded">
                       {tech}
@@ -195,7 +195,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
                       if (!content) return <br key={i} className="h-2 block"/>;
 
                       return (
-                        <div key={i} className={`text-slate-700 leading-relaxed ${isBullet ? 'flex gap-3' : ''}`}>
+                        <div key={i} className={`text-slate-900 leading-relaxed ${isBullet ? 'flex gap-3' : ''}`}>
                           {isBullet && (
                             <div className="mt-2 w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0" />
                           )}

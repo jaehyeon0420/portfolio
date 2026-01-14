@@ -95,8 +95,8 @@ export const PROJECTS: Project[] = [
                 "FastAPI", "React", "Javascript", "Zustand", "Electron", 
                 "OpenAI API", "Redis", "PostgreSQL(pgvector)", "ONNX-int8", "KURE-v1"],
     readme: `
-## 비즈니스 목표
-- 기존 : 근로자는 필요한 정보를 탐색하고 수집하는데 업무 시간의 약 20% 이상을 낭비하고, 1회당 평균 200초 이상이 걸림
+## 개요
+- 기존 : 근로자는 필요한 정보를 탐색하고 수집하는데 업무 시간의 약 20% 이상을 낭비하고, --1회당 평균 200초-- 이상이 소요됨
 - 목표 : 사내 정형(RDB)/비정형(Google Drive) 통합 데이터 기반 RAG를 구축하여 업무 생산성 향상
 
 ## 기술 선정 이유
@@ -117,7 +117,7 @@ export const PROJECTS: Project[] = [
 ##2. 보안 강화 목적인 RLS 정책이 적용된 데이터 접근 시, 권한 부족과 사용자 인지 불일치##
 - 문제 : LLM 생성 SQL 실행 -> 권한 부족으로 조회 결과 0개 -> 사용자에게 "데이터 미 존재" 응답 -> 권한 부족과 데이터 실제 부재를 구분하지 못함
 - 1차 시도 : 모든 SQL 실행 이전에 사용자 권한을 체크하기 위한 검증 질의 실행 -> 요청마다 검증 로직 추가되어 성능 저하 발생
-- 해결 : 조회 결과 건수가 0건 일 때에만 관리자 권한으로 데이터의 존재 여부만 후검증 및 분기 처리하여 사용자 경험 최적화
+- 해결 : 조회 결과 건수가 0건 일 때에만 관리자 권한으로 데이터의 존재 여부 후검증 및 분기 처리하여 사용자 경험 최적화
 
 ## 성과
 - 정보 탐색 시간을 --200초--에서 평균 ^^7초^^로 ^^96.5%^^ 단축하여, 업무의 생산성 향상
@@ -140,13 +140,29 @@ export const PROJECTS: Project[] = [
     techStack: ["Google AI Studio", "React", "Typescript", "Gemini 3.0 Preview"],
     readme: `# TF Addons 기여
 
-## 설명
-더 빠른 실행을 위해 CUDA로 'Mish' 활성화 함수를 구현했습니다.
+## 해커톤 개요
+- 주최 : Google DeepMind / Kaggle
+- 행사명 : Vibe Coding with Gemini 3 Pro
+- 목적 및 특징 : Gemini 3 Pro를 활용하여 ##자연어 프롬프팅##만으로 개발자의 의도를 지시문으로 변환하여 아키텍처를 설계하고 기능을 구현하는 능력 평가
 
-## PR 세부 사항
-- CUDA 커널 구현 추가.
-- 역전파를 위한 그래디언트 계산 추가.
-- 99% 이상의 커버리지를 가진 단위 테스트 작성.`,
+## 프로젝트
+- 문제 : 강의 PDF와 대화 로그를 번갈아 확인하며 발생하는 --학습 흐름 단절--과 방대한 대화 로그를 --과도하게 압축 요약--하는 LLM의 한계
+- 목적 : 강의 PDF, 학습자와 LLM 간의 대화 로그를 분석해 학습자의 부족한 부분을 파악하고 관련 슬라이드 뒤에 요약/보충 페이지를 삽입한 새로운 PDF 제공
+- 워크플로우 : 강의 PDF와 대화 로그 입력 -> 대화 로그를 의미 단위로 분할 -> 분할된 각 청크와 PDF 슬라이드 매핑 -> 매핑된 슬라이드와 대화 로그에서 발견된 학습 정도를 결합한 요약/보충 페이지 생성 -> 원본 슬라이드 사이에 생성된 페이지 삽입하여 최종 결과물 제공
+
+## 프롬프팅 전략
+##1. 단계적 추론 기법(Chain of Thought) 적용##
+- 문제 : 분할된 청크와 PDF 슬라이드 매핑 시 연관되지 않은 슬라이드와 매핑되거나 하나의 슬라이드에 여러 청크가 매핑되는 현상 발생
+- 해결 : "1. 핵심 키워드 추출" -> "2. 슬라이드 텍스트 대조" -> "3. 연관성 점수 산출" -> "4. 슬라이드 매핑"의 단계적 추론 제시
+##2. 상태 유지를 위한 Context.md 생성##
+- 문제 : 대화가 길어짐에 따라 LLM이 이전의 대화 내용을 망각하여 코드 일관성이 흐트러짐.
+- 해결 : 프로젝트 루트에 Context.md를 생성하고 매번 ##현재 구현 상태##, ##함수 목록##, ##버그 내용##을 기록하게 함. 이후 모든 작업 시작 전 이 파일을 참조하게 페르소나 부여
+
+## 성과
+- ^^7,000토큰 이상^^의 대화 로그와 약 ^^20페이지^^ 분량의 강의 PDF를 단일 컨텍스트 창에서 데이터 유실 없이 처리
+- CoT 기법 적용하여 단 ^^5번^^의 프롬프팅으로 최소 MVP 모델 구현 완료
+- Context.md 생성 전후 비교 시, 긴 대화 세션(30회 이상의 턴)에서 발생하던 "대화 내용 망각" 오류를 기존 대비 ^^60%^^ 이상 억제
+`,
     thumnailimage : "files/images/hackathon-logo.png",
     videoUrl: "files/videos/hackathon.mp4",
     github_url : "https://www.kaggle.com/competitions/gemini-3/writeups/new-writeup-1765379357595"
@@ -160,24 +176,45 @@ export const PROJECTS: Project[] = [
     period2: "8일",
     teamSize: 6,
     role: "풀스택 개발 및 DevOps 리드",
-    description: "딥러닝 기반 차량 파손 이미지 분석을 통한 파손 종류 식별, 부위 감지, 실시간 수리비 예측 솔루션입니다.",
+    description: "딥러닝 기반 차량 파손 이미지 분석을 통한 파손 종류와 부위를 감지하여 실시간 수리비를 예측하는 솔루션입니다.",
     techStack: ["Java", "Spring Boot", "Python", "FastAPI", 
                 "React", "Javascript", "Zustand", "Custom Vision", 
-                "Mask R-CNN", "PostgreSQL", "Jenkins", "GitHub Actions",
-                "Azure Container Apps", "Azure Container Registry","Azure Static Web App","Azure VM"
+                "Mask R-CNN", "PostgreSQL", "Jenkins", "GitHub Actions", "Docker",
+                "Azure VM", "Azure Container Registry", "Azure Container Apps","Azure Static Web App"
               ],
-    readme: `# 비전 가드 AI (Vision Guard AI)
+    readme: `
+## 개요
+- 문제: 차량 파손 발생 시 정비소별 주관적 견적 산출로 인해 --정보 비대칭 및 과잉 청구-- 문제와 견적 확정까지 반복적인 커뮤니케이션으로 인해 --평균 1~2일 이상--의 시간 소요
+- 목표: 컴퓨터 비전 모델 기반 파손 부위 감지 및 면적 기반의 수리비 예측 시스템 PoC를 구축하여, ^^3분 내^^ 가이드 견적 제공
 
-## 미션
-실시간 비디오 피드에서 이상 징후를 감지하여 산업 재해를 예방합니다.
+## 기술 선정 이유
+**Azure Container Apps** : 단기 스프린트 내 복잡한 인프라 관리 없이도 자동 스케일링 및 컨테이너 관리가 가능함
+**Spring Boot & FastAPI 분리**: PoC 단계에서 모델의 잦은 교체와 성능 테스트 필요로 AI 모델 서빙 담당인 FastAPI와 비즈니스 담당인 Spring을 분리
+**GitHub Actions** : 코드 변경 감지 및 소스 코드 레벨의 CI(Lint, Test)를 수행하는 클라우드 네이티브 도구로 활용
+**Jenkins(on VM)**: 내부 네트워크 보안이 중요한 인프라 환경을 가정하여, Docker 이미지 빌드 및 ACR(Azure Container Registry) 푸시 등 고부하 작업과 인프라 제어를 분담하는 하이브리드 파이프라인 구성
 
-## 기술 사양
-- **모델**: 커스텀 파인튜닝된 Vision Transformer (ViT-B/16).
-- **추론**: 엣지 디바이스(Jetson Orin)를 위한 TensorRT 최적화.
-- **지연 시간**: 프레임당 50ms 미만의 처리 시간.
+## 문제 해결 과정
+##1. 딥러닝 모델 Docker 이미지 크기로 인한 배포 지연##
+문제: Mask R-CNN 및 추론 라이브러리가 포함된 FastAPI 이미지 크기가 --4GB 이상--으로 커져, CI/CD 빌드 및 배포 시간이 --15분 이상-- 소요됨
+시도: 단일 Dockerfile로 빌드 시 모든 라이브러리 레이어가 캐싱되지 않아 매번 전체를 재압축함
+해결: Multi-stage Build를 적용하고, 변경이 적은 딥러닝 의존성 레이어를 하단으로 배치하여 캐시 효율을 최적화함. 결과적으로 이미지 크기를 최적화하고 재배포 시간을 ^^약 5분 내외^^로 ^^66% 감소^^시킴
 
-## 나의 기여
-4명의 팀을 이끌었으며, 특히 모델 아키텍처 설계와 데이터 증강 파이프라인에 집중했습니다.`,
+##2. 파이프라인 간 인증 정보 노출 및 보안 취약성##
+문제: Jenkins와 Azure 환경을 연결하는 과정에서 Service Principal 키가 설정 파일에 노출될 위험 및 도구 간 인증 연동의 복잡성 발생
+시도: Jenkins Credentials Plugin에 평문 저장 시 관리 포인트 증가 및 유출 위험 존재
+해결: Azure CLI와 연동된 Managed Identity 및 Jenkins의 환경변수 마스킹을 적용하고, GitHub Actions에서 Jenkins로의 호출 시 웹훅 토큰 인증을 강화하여 보안 가시성 확보
+
+##3. 서로 다른 모델 결과값(Classification & Segmentation)의 데이터 파이프라인 불일치##
+문제: Custom Vision(분류)의 출력 포맷과 Mask R-CNN(세그멘테이션) 입력 요구 형식이 달라, API 연동 시 데이터 유실 및 런타임 에러 발생
+시도: 각 모델 서버를 직접 호출하게 하였으나 네트워크 오버헤드와 데이터 정합성 문제 발생
+해결: FastAPI를 Middleware 패턴으로 활용하여 Custom Vision의 추론 결과를 실시간 파싱하고, Mask R-CNN의 Tensor 형태에 맞게 전처리하는 통합 추론 로직을 백엔드에 구축하여 데이터 흐름을 정형화함
+
+## 성과
+- 수동 견적 확인 프로세스를 자동화하여 견적 산출 시간을 --최소 수 시간--에서 ^^평균 10초 이내^^로 단축하여 PoC 완성도 증명
+- 사용자 인증(OAuth2) 기반의 데이터 관리 체계를 구축하여, 개인별 수리 이력 추적 및 견적 데이터의 신뢰도 확보
+- 코드 Push부터 Azure 배포까지 전 과정을 자동화하여, 8일의 짧은 개발 기간 동안 수동 배포 리소스를 ^^0건^^으로 유지하며 로직 개선에 집중
+- 서로 다른 프레임워크 기반의 AI 모델을 하나의 백엔드 워크플로우로 통합하여, 단순 분류를 넘어선 면적 기반의 정밀한 비용 산출 엔진 구현
+`,
     thumnailimage : "files/images/snapq-logo.png",
     videoUrl: "files/videos/snapq.mp4",
     github_url : ""
