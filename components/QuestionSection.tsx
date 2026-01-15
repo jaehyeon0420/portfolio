@@ -156,7 +156,6 @@ const QuestionSection: React.FC = () => {
                 onClick={handleAnalyze} 
                 disabled={!selectedJob || loading}
                 className="w-full md:w-auto min-w-[200px] !py-3 !text-lg"
-                icon={loading ? <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1 }}><Sparkles size={20}/></motion.div> : <Send size={20}/>}
               >
                 {loading ? 'AI가 분석 중입니다...' : '적합도 검증'}
               </Button>

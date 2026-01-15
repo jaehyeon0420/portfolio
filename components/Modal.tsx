@@ -44,8 +44,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
     // Helper to determine section type based on keywords
     const getSectionType = (title: string): ParsedSection['type'] => {
       const t = title.toLowerCase();
-      if (t.includes('문제') || t.includes('challenge') || t.includes('pain point')) return 'problem';
-      if (t.includes('기술') || t.includes('stack') || t.includes('tech') || t.includes('선정')) return 'tech';
+      if (t.includes('문제') || t.includes('전략') || t.includes('challenge') || t.includes('pain point')) return 'problem';
+      if (t.includes('기술') || t.includes('프로젝트') || t.includes('stack') || t.includes('tech') || t.includes('선정')) return 'tech';
       if (t.includes('과정') || t.includes('process') || t.includes('해결') || t.includes('구현')) return 'process';
       if (t.includes('성과') || t.includes('result') || t.includes('outcomes')) return 'result';
       if (t.includes('개요') || t.includes('overview') || t.includes('summary')) return 'overview';
@@ -102,6 +102,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
   };
 
   // Style mapping for sections
+  /*
   const getSectionStyles = (type: ParsedSection['type']) => {
     switch (type) {
       case 'problem': return "bg-orange-50 border-orange-100";
@@ -111,7 +112,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
       case 'overview': return "bg-indigo-50 border-indigo-100";
       default: return "bg-white border-slate-100";
     }
-  };
+  };*/
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm transition-opacity duration-300" onClick={onClose}>
@@ -120,8 +121,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header - Fixed */}
-        <div className="flex-none p-6 border-b border-slate-100 bg-white z-10">
-          <div className="flex justify-between items-start mb-4">
+        <div className="flex-none p-6 border-b border-slate-100 bg-white z-10 ">
+          <div className="flex justify-between items-start mb-4 ">
              <div>
                <h3 className="flex text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight">
                  {project.main_title} : {project.title}&nbsp;
@@ -138,7 +139,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
           </div>
 
           {/* Project Meta Info Bar */}
-          <div className="flex flex-wrap gap-y-2 gap-x-6 text-sm text-slate-600 px-4 py-3 rounded-xl border border-slate-100">
+          <div className="flex flex-wrap gap-y-2 gap-x-6 text-sm text-slate-600 px-4 py-3 rounded-xl border border-slate-100 border-blue-100">
              <div className="flex items-center gap-2 mb-2">
                <Calendar size={16} className="text-blue-500"/>
                <span className="font-medium">{project.period1} <span className="text-s text-purple-600">({project.period2})</span></span>
@@ -177,7 +178,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
               {parsedReadme.map((section, idx) => (
                 <div 
                   key={idx} 
-                  className={`rounded-xl border shadow-sm p-6 transition-all hover:shadow-md ${getSectionStyles(section.type)}`}
+                  //className={`rounded-xl border shadow-sm p-6 transition-all hover:shadow-md ${getSectionStyles(section.type)}`}
+                  className={`rounded-xl border shadow-sm p-6 transition-all hover:shadow-md`}
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className="p-2 bg-white rounded-lg shadow-sm border border-slate-100">
