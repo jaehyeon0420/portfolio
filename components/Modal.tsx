@@ -190,6 +190,22 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
                   
                   <div className="space-y-3">
                     {section.content.map((line, i) => {
+                      const imgMatch = line.match(/<img.*?src=["'](.*?)["'].*?>/i);
+                      if (imgMatch) {
+                        return (
+                          <div key={i} className="my-4">
+                            <img 
+                              src={imgMatch[1]} 
+                              alt="Context illustration" 
+                              className="max-w-full h-auto rounded-lg shadow-md mx-auto"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).style.display = 'none';
+                              }}
+                            />
+                          </div>
+                        );
+                      }
+                      
                       // Formatting logic for bullet points or emphasis
                       const isBullet = line.trim().startsWith('- ');
                       const content = line.replace('- ', '').trim();

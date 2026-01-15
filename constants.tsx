@@ -99,6 +99,12 @@ export const PROJECTS: Project[] = [
 - 기존 : 근로자는 필요한 정보를 탐색하고 수집하는데 업무 시간의 --약 20% 이상을 낭비--하고, --1회당 평균 200초-- 이상이 소요됨
 - 목표 : 사내 ##정형##(RDB)/##비정형##(Google Drive) 통합 데이터 기반 RAG를 구축하여 업무 생산성 향상
 
+## 애플리케이션 흐름도
+<img src="files/images/deepnexus-flow.PNG">
+
+## 시스템 아키텍처
+<img src="files/images/deepnexus-architecture.PNG">
+
 ## 기술 선정 이유
 - **LangGraph**: 정형 데이터 조회 명령어(SQL) ##오류 발생 시, 자가 교정 루프##를 통해 응답 성공률을 높이기 위함
 - **ONNX-int8**: 프로젝트 목표인 탐색 시간 단축을 위해, 1~2% 내외의 미세한 정확도 손실을 감수하는 대신 ##CPU 환경에서도 안정적 추론 속도 보장##을 위함
@@ -187,6 +193,12 @@ export const PROJECTS: Project[] = [
 - 문제: 차량 파손 발생 시 정비소별 주관적 견적 산출로 인해 --정보 비대칭 및 과잉 청구-- 문제와 견적 확정까지 반복적인 커뮤니케이션으로 인해 --평균 1~2일 이상--의 시간 소요
 - 목표: 컴퓨터 비전 모델 기반 파손 부위 감지 및 면적 기반의 수리비 예측 시스템 PoC를 구축하여, ^^3분 내^^ 가이드 견적 제공
 
+## 애플리케이션 흐름도 
+<img src="files/images/snapq-flow.PNG">
+
+## 시스템 아키텍처
+<img src="files/images/snapq-architecture.PNG">
+
 ## 기술 선정 이유
 **Azure Container Apps** : 단기 스프린트 내 복잡한 인프라 관리 없이도 자동 스케일링 및 컨테이너 관리가 가능함
 **Spring Boot & FastAPI 분리**: PoC 단계에서 모델의 잦은 교체와 성능 테스트 필요로 AI 모델 서빙 담당인 FastAPI와 비즈니스 담당인 Spring을 분리
@@ -200,6 +212,7 @@ export const PROJECTS: Project[] = [
 ## 성과
 - 객관적 견적 산출 및 견적 확인 프로세스 자동화를 통해 견적 의뢰부터 산출까지 시간을 --최소 수 시간--에서 ^^평균 3분 이내^^로 단축
 - 코드 Push 이후부터 Azure 배포까지 모든 과정을 자동화하여, 8일의 짧은 개발 기간 동안 수동 배포 리소스를 ^^0건^^으로 유지함
+
 `,
     thumnailimage : "files/images/snapq-logo.png",
     videoUrl: "files/videos/snapq.mp4",
