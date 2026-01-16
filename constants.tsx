@@ -102,6 +102,9 @@ export const PROJECTS: Project[] = [
 ## 애플리케이션 흐름도
 <img src="files/images/deepnexus-flow.PNG">
 
+## ETL 파이프라인
+<img src="files/images/deepnexus-data-pipeline.PNG">
+
 ## 시스템 아키텍처
 <img src="files/images/deepnexus-architecture.PNG">
 
@@ -200,9 +203,13 @@ export const PROJECTS: Project[] = [
 <img src="files/images/snapq-architecture.PNG">
 
 ## 기술 선정 이유
-**Azure Container Apps** : 단기 스프린트 내 복잡한 인프라 관리 없이도 자동 스케일링 및 컨테이너 관리가 가능함
-**Spring Boot & FastAPI 분리**: PoC 단계에서 모델의 잦은 교체와 성능 테스트 필요로 AI 모델 서빙 담당인 FastAPI와 비즈니스 담당인 Spring을 분리
-**Jenkins(on VM)**: Azure의 고사양 VM에 Jenkins를 설치하여 애플리케이션 이미지 빌드 및 배포까지 자동화를 위함
+**Azure Static Web Apps** : 소규모 프로젝트 진행 시 비용이 무료이며 Client Side Rendering 로직 구현에 적합함
+**Azure Container Apps** : 단기 스프린트 내 복잡한 인프라 관리 없이도 ##자동 스케일링## 및 컨테이너 관리가 가능함
+**Spring Boot & FastAPI 분리** : PoC 단계에서 모델의 잦은 교체와 성능 테스트 필요로 ##AI 모델 서빙 담당인 FastAPI##와 ##비즈니스 로직 담당인 Spring##을 분리
+**Azure PostgreSQL** : 복잡한 구조를 가지는 모델 추론 결과(JSON)를 별도 파싱 없이 즉시 저장 및 쿼리할 수 있음
+**Zustand** : AccessToken을 관리하기 위함(Redux의 장점을 가지지만 가볍고 사용 문법이 간단함)
+**Jenkins(on VM)** : Azure의 고사양 VM에 Jenkins를 설치하여 애플리케이션 이미지 ##빌드 및 배포까지 자동화##를 위함
+
 
 ## 문제 해결 과정
 ##1. 딥러닝 모델 Docker 이미지 크기로 인한 배포 지연##

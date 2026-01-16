@@ -155,7 +155,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
              {project.github_url &&
              <div className="flex items-center gap-2 mb-2">
                <Link size={16} className="text-blue-500"/>
-               <a href={project.github_url}>{project.github_url}</a>
+               <a target="_blank" href={project.github_url}>{project.github_url}</a>
              </div>
              }
              <br/>
@@ -197,7 +197,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
                             <img 
                               src={imgMatch[1]} 
                               alt="Context illustration" 
-                              className="max-w-full h-auto rounded-lg shadow-md mx-auto"
+                              className="max-w-full h-85 rounded-lg shadow-md mx-auto"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).style.display = 'none';
                               }}
