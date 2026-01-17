@@ -92,8 +92,7 @@ const ProjectSection: React.FC = () => {
                 {/* Actions */}
                 <div className="grid grid-cols-1 gap-2 mt-auto">
                   <Button 
-                    variant="ghost" 
-                    className="!px-2 !py-2 text-xs" 
+                    className="!px-2 !py-2 text-s" 
                     icon={<FileText size={16}/>}
                     onClick={() => openModal(project, 'readme')}
                   >

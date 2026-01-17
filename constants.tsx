@@ -62,14 +62,14 @@ export const SKILLS: SkillCategory[] = [
   {
     category: 'Strong',
     skills: [
-      'Java', 'Spring Boot', 'Javascript', 'React.js', 'Axios', 'Zustand', 'JSP', 'jQuery', 'Oracle', 'Mybatis', 'HTML5', 'CSS3'
+      'Java', 'Spring Boot', 'Javascript', 'React.js', 'JSP', 'Oracle', 'Mybatis', 'HTML5', 'CSS3'
     ]
   },
   {
     category: 'Knowledgeable',
     skills: [
       'Python', 'FastAPI', 'LangChain', 'LangGraph', 'Redis', 'PostgreSQL', 'Apache Tomcat',
-      'Electron', 'Recoil', 'Apache Tomcat'
+      'Electron', 'Recoil'
     ]
   },
   {
@@ -96,8 +96,8 @@ export const PROJECTS: Project[] = [
                 "OpenAI API", "Redis", "PostgreSQL(pgvector)", "ONNX-int8", "KURE-v1"],
     readme: `
 ## 개요
-- 기존 : 근로자는 필요한 정보를 탐색하고 수집하는데 업무 시간의 --약 20% 이상을 낭비--하고, --1회당 평균 200초-- 이상이 소요됨
-- 목표 : 사내 ##정형##(RDB)/##비정형##(Google Drive) 통합 데이터 기반 RAG를 구축하여 업무 생산성 향상
+- ##배경## : 근로자는 필요한 정보를 탐색하고 수집하는데 업무 시간의 --약 20% 이상을 낭비--하고, --1회당 평균 200초-- 이상이 소요됨
+- ##목표## : 사내 ##정형##(RDB)/##비정형##(Google Drive) 통합 데이터 기반 RAG를 구축하여 업무 생산성 향상
 
 ## 애플리케이션 흐름도
 <img src="files/images/deepnexus-flow.PNG">
@@ -155,8 +155,8 @@ export const PROJECTS: Project[] = [
 - 목적 및 특징 : Gemini 3 Pro를 활용하여 ##자연어 프롬프팅##만으로 개발자의 의도를 지시문으로 변환하여 아키텍처를 설계하고 기능을 구현하는 능력 평가
 
 ## 프로젝트
-- 문제 : 강의 PDF와 대화 로그를 번갈아 확인하며 발생하는 --학습 흐름 단절--과 방대한 대화 로그를 --과도하게 압축 요약--하는 LLM의 한계
-- 목적 : 강의 PDF, 학습자와 LLM 간의 대화 로그를 분석해 학습자의 부족한 부분을 파악하고 관련 슬라이드 뒤에 ##요약/보충 페이지를 삽입한 새로운 PDF 제공##
+- 배경 : 강의 PDF와 대화 로그를 번갈아 확인하며 발생하는 --학습 흐름 단절--과 방대한 대화 로그를 --과도하게 압축 요약--하는 LLM의 한계
+- 목표 : 강의 PDF, 학습자와 LLM 간의 대화 로그를 분석해 학습자의 부족한 부분을 파악하고 관련 슬라이드 뒤에 ##요약/보충 페이지를 삽입한 새로운 PDF 제공##
 - 워크플로우 : 강의 PDF와 대화 로그 입력 -> 대화 로그를 의미 단위로 분할 -> 분할된 각 청크와 PDF 슬라이드 매핑 -> 매핑된 슬라이드와 대화 로그에서 발견된 학습 정도를 결합한 요약/보충 페이지 생성 -> 원본 슬라이드 사이에 생성된 페이지 삽입하여 최종 결과물 제공
 
 ## 프롬프팅 전략
@@ -193,8 +193,8 @@ export const PROJECTS: Project[] = [
               ],
     readme: `
 ## 개요
-- 문제: 차량 파손 발생 시 정비소별 주관적 견적 산출로 인해 --정보 비대칭 및 과잉 청구-- 문제와 견적 확정까지 반복적인 커뮤니케이션으로 인해 --평균 1~2일 이상--의 시간 소요
-- 목표: 컴퓨터 비전 모델 기반 파손 부위 감지 및 면적 기반의 수리비 예측 시스템 PoC를 구축하여, ^^3분 내^^ 가이드 견적 제공
+- ##배경## : 차량 파손 발생 시 정비소별 주관적 견적 산출로 인해 --정보 비대칭 및 과잉 청구-- 문제와 견적 확정까지 반복적인 커뮤니케이션으로 인해 --평균 1~2일 이상--의 시간 소요
+- ##목표## : 컴퓨터 비전 모델 기반 파손 부위 감지 및 면적 기반의 수리비 예측 시스템 PoC를 구축하여, ^^3분 내^^ 가이드 견적 제공
 
 ## 애플리케이션 흐름도 
 <img src="files/images/snapq-flow.PNG">
@@ -224,5 +224,97 @@ export const PROJECTS: Project[] = [
     thumnailimage : "files/images/snapq-logo.png",
     videoUrl: "files/videos/snapq.mp4",
     github_url : ""
-  }  
+  },  
+  {
+    id: "p4",
+    kind : "Project",
+    main_title : "",
+    title: "인프라 비용 절감을 위한 서버 교체",
+    period1: "2023.05.10 - 2023.05.25",
+    period2: "12일",
+    teamSize: 1,
+    role: "Apache Tomcat 서버 구축 및 SSL 인증서 적용",
+    description: "고비용 상용 WAS(WebLogic)의 의존도를 없애고, 오픈소스 기반 아키텍처로 전환한 프로젝트입니다.",
+    techStack: ["Apache", "Tomcat"],
+    readme: `
+## 개요
+- ##배경## : 기존 WAS(WebLogic)의 --높은 유지보수 비용--으로 인한 문제와, 유연하게 대응할 수 있는 경량 오픈소스 아키텍처로의 전환 필요
+- ##목표## : ##TCO(총 소유 비용) 절감## 및 ##아키텍처 경량화##로 시스템 운영 효율성 향상
+
+## 담당 역할
+##1. 부하 분산 최적화##
+- mod_jk 커넥터를 활용해 Apache와 Tomcat을 연동하고, worker.properties 내 가중치 설정을 통해 서버 사양에 따른 트래픽 오케스트레이션 수행
+##2. Stateful 환경의 고가용성 확보##
+- WAS 인스턴스 간 Session Clustering을 구현하여 특정 노드 Fault 시에도 사용자 컨텍스트가 유지되는 결함 허용 시스템 구축
+##3. SSL 인증서 적용##
+- 웹 서버(Apache) 레벨에서 SSL 인증서를 관리하도록 설정하여 WAS의 연산 부하를 줄이고 관리 포인트 통합
+
+## 성과
+- 상용 소프트웨어 라이선스 ^^비용 100% 제거^^로 인프라 유지보수 비용 절감
+`,
+    thumnailimage : "files/images/default-image.png",
+    videoUrl: "",
+    github_url : ""
+  },  
+  {
+    id: "p5",
+    kind : "Project",
+    main_title : "",
+    title: "FIDO 표준 기반 간편 로그인 시스템 구축",
+    period1: "2022.02.08 - 2022.04.14",
+    period2: "약 2개월",
+    teamSize: 3,
+    role: "FIDO 서버 통신 및 인증 라이프사이클 백엔드 로직 개발",
+    description: "보안 표준인 FIDO 프로토콜을 활용하여 사용자 경험을 혁신하고, 복합 인증 수단에 대한 데이터 모델링 및 관리 체계를 구축한 프로젝트입니다.",
+    techStack: ["FIDO UAF", "Morpheus IDE", "Javascript", "Java", "Spring Framework", "Oracle"],
+    readme: `
+## 개요
+- ##배경## : 고연령층 사용자의 인증 이탈률을 낮추기 위해 기존 ID/PW 방식의 한계를 극복하는 ##생체 인증 시스템## 도입 필요
+- ##목표## : FIDO(Fast Identity Online) 표준 프로토콜을 적용한 ##간편 인증 관리 체계 구축## 및 사용자 접근성 제고
+
+## 담당 역할
+##1. 인증 오케스트레이션##
+- FIDO 서버와의 통신을 통한 인증 수단(패턴, PIN, 지문, Face ID)의 등록·수정·삭제 로직 전담 개발
+##2. DB 스키마 모델링##
+- 멀티 모달 인증 정보와 인증 이력 관리를 위한 데이터베이스 모델링 수행
+##3. 관리 백엔드 구축##
+- 간편 로그인 수단별 라이프사이클 관리 및 사용자별 인증 상태 동기화 API 설계
+
+## 성과
+- 도입 이후 전체 유저의 약 ^^80% 이상^^이 간편 인증으로 전환하였고, 인증 단계에서의 사용자 이탈률 감소
+- 로그인 관련 CS 요청 건수 약 ^^15% 이상^^감소를 통한 운영 리소스 최적화 및 사용자 편의성 증대
+`,
+    thumnailimage : "files/images/default-image.png",
+    videoUrl: "",
+    github_url : ""
+  },  
+  {
+    id: "p6",
+    kind : "Project",
+    main_title : "",
+    title: "과거 데이터 기반 수요 예측 및 업무 자동화",
+    period1: "2021.09.02 - 2021.10.12",
+    period2: "약 1개월",
+    teamSize: 1,
+    role: "최근 3개월 데이터 기반 배송 요청 배치 파이프라인 개발",
+    description: "대리점의 수동 신청 업무를 과거 데이터 기반의 자동화 프로세스로 재설계하여, 업무 누락을 방지하고 본사와 대리점 간의 운영 효율을 향상시킨 프로젝트입니다.",
+    techStack: ["Java", "Spring Framework", "Oracle", "ControlM"],
+    readme: `
+## 개요
+- ##배경## : 대리점별 ##수동 발주##와 본사의 ##반복 검수## 및 후처리 과정에서 발생하는 --리소스 낭비 및 오배송 리스크-- 해소 필요
+- ##목표## : 과거 데이터 기반의 수요 예측을 통해 엔드 투 엔드 ##배송 요청 업무를 자동화##하여 업무 효율성 증대
+
+## 담당 역할
+##1. 배치 파이프라인 자동화##
+- Spring Framework의 Bean을 활용하여 [최근 3개월 전표 및 대리점별 사용량 추출 -> 신청 가능 건수 계산 -> 전표 신청 -> 배송 요청]으로 이어지는 프로세스 자동화
+
+## 성과
+- 기존 수동 프로세스 대비 본사 담당자 업무 시간 월평균 ^^15시간 이상 절감^^
+- 데이터 기반 자동 발주를 통해 사람에 의한 ^^오배송 및 재고 누락율 0%^^로 업무 누락 방지
+
+`,
+    thumnailimage : "files/images/default-image.png",
+    videoUrl: "",
+    github_url : ""
+  }
 ];

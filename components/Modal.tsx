@@ -125,7 +125,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, project }) => {
           <div className="flex justify-between items-start mb-4 ">
              <div>
                <h3 className="flex text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight">
-                 {project.main_title} : {project.title}&nbsp;
+                 {project.main_title && project.main_title + ' : '}{project.title}&nbsp;
                  {project.kind == 'Project'
                   ? <span className="text-blue-600 flex items-center gap-1">[{project.kind}]</span>
                   : <span className="text-green-600 flex items-center gap-1">[{project.kind}]</span>}
